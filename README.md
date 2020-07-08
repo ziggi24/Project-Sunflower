@@ -82,12 +82,12 @@ I'm thinking this is a good, softer, font for body text.
 
 ### External Express Modules/Middleware
 
-- [helmet](https://github.com/helmetjs/helmet)
-- [protect](https://github.com/RisingStack/protect)
-- [tippy](https://atomiks.github.io/tippyjs/)
-- [morgan](https://github.com/expressjs/morgan) 
-- [passport](http://www.passportjs.org/)
-- [node-postgres](https://node-postgres.com/)
+- [helmet](https://github.com/helmetjs/helmet) - security middleware, adds HTTPS headers
+- [protect](https://github.com/RisingStack/protect) - protects agains SQL injection and XSS
+- [tippy](https://atomiks.github.io/tippyjs/) - Tool Tips!
+- [morgan](https://github.com/expressjs/morgan) - better request logger
+- [passport](http://www.passportjs.org/) - external auth (google, fb, etc)
+- [node-postgres](https://node-postgres.com/) - postgres db middleware
 
 
 
