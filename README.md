@@ -80,6 +80,16 @@ I'm thinking this is a good, softer, font for body text.
 
 - Postgresql 
 
+##### External Express Modules/Middleware
+
+- [helmet](https://github.com/helmetjs/helmet)
+- [protect](https://github.com/RisingStack/protect)
+- [tippy](https://atomiks.github.io/tippyjs/)
+- [morgan](https://github.com/expressjs/morgan) 
+- [passport](http://www.passportjs.org/)
+- [node-postgres](https://node-postgres.com/)
+
+
 
 ## MVP 
 
