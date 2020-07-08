@@ -81,7 +81,15 @@ I'm thinking this is a good, softer, font for body text.
 - Postgresql 
 
 
+## MVP 
 
+- user auth
+
+- basic flower with changing colors 
+
+- infinitely scrolling log of mood entries
+
+- basic styling
 
 
 ## Sprint Schedule
