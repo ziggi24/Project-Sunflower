@@ -1,0 +1,27 @@
+body {
+  background: rgb(226,243,255);
+background: linear-gradient(180deg, rgba(252,229,176,1) 0%, rgba(203,234,255,1) 30%,  rgba(226,243,255,1) 100%);
+  color: #1f1f1f;
+  height: 100vh;
+}
+.flower {
+  width: 100px;
+  height: 100px;
+}
+.stem{
+  width: 20px;
+  height: 60px;
+  margin-bottom: 1px;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+}
+.right {
+  width: 30vw;
+  /* justify-self: flex-end; */
+  align-self: flex-start;
+}
+.left {
+  width: 40vw;
+}

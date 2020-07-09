@@ -4,18 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/profile.css">
   <title>Document</title>
-  <style>
-    .flower {
-      width: 100px;
-      height: 100px;
-    }
-
-    .stem {
-      width: 20px;
-      height: 60px;
-    }
-  </style>
 </head>
 
 <body>
@@ -23,16 +13,47 @@
   <form action="/logout" method='GET'>
     <input type="submit" value="Logout">
   </form>
-  <div class="flower-container">
-    <div class="flower"
-      style='background-color: rgb(<%=user.petals.red%>, <%=user.petals.green%>, <%=user.petals.blue%>);'>
-      <%=user.flower%></div>
-    <div class="stem" style='background-color: rgb(<%=user.stem.red%>, <%=user.stem.green%>, <%=user.stem.blue%>);'>
+  <br>
+  <main class='container'>
+    <div class="left">
+      <div class="flower-container">
+        <div class="flower"
+          style='background-color: rgb(<%=user.petals.red%>, <%=user.petals.green%>, <%=user.petals.blue%>);'>
+          <%=user.flower%></div>
+        <% for( let index = 0; index < user.log.length; index++ ) { %>
+        <a href="/profile/<%=user.username%>/<%=user.log[index]._id%>">
+          <div class="stem"
+            style='background-color: rgb(<%=user.stem.red%>, <%=user.stem.green%>, <%=user.stem.blue%>);'>
+          </div>
+        </a>
+        <% } %>
+      </div>
     </div>
-  </div>
-  <div class="form-container">
+    <div class="right">
+      <div class="form-container">
+        <form action='/profile/<%=user.username%>' method='POST'>
+          <p>
+            <label for="mood">Mood</label>
+            <input type="number" name="mood">
+          </p>
+          <p>
+            <label for="feeling">Feeling</label>
+            <input type="number" name="feeling">
+          </p>
+          <p>
+            <label for="frequentEmotion">Frequent Emotion</label>
+            <input type="text" name="frequentEmotion">
+          </p>
+          <p>
+            <label for="notes">Notes</label>
+            <input type="text" name="notes">
+          </p>
+          <input type="submit" value="Log Mood">
+        </form>
+      </div>
+    </div>
 
-  </div>
+  </main>
 </body>
 
 </html>

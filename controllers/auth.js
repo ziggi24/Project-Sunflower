@@ -8,7 +8,7 @@ const Strategy = require('passport-local').Strategy;
 const db = require('../models');
 
 // Configure the local strategy for use by Passport.
-// (taken from the passport.js docs, modified to be async)
+// (taken from the passport.js docs, refactored to be async)
 //
 // The local strategy require a `verify` function which receives the credentials
 // (`username` and `password`) submitted by the user.  The function must verify
@@ -84,22 +84,52 @@ router.post('/signup', async (req, res, next) => {
   }
 });
 
-router.get('/profile/:username',
-  require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
-    try {
-      console.log(req.session.passport.user)
-      const user = await db.User.findById({ _id: req.session.passport.user });
-      const context = {
-        user: user,
-      }
-      console.log(context)
-      return res.render('auth/profile', context);
-    } catch (err) {
-      console.log(err)
-      return res.json({
-        message: err.message,
-      })
+router.get('/profile/:username', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
+  try {
+    console.log(req.session.passport.user)
+    const user = await db.User.findById({ _id: req.session.passport.user });
+    const context = {
+      user: user,
     }
-  });
+    console.log(context)
+    return res.render('auth/profile', context);
+  } catch (err) {
+    console.log(err)
+    return res.json({
+      message: err.message,
+    })
+  }
+});
+
+router.post('/profile/:username', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
+  try {
+    const user = await db.User.findById({ _id: req.session.passport.user });
+    const newMood = await db.Mood.create({
+      mood: req.body.mood,
+      feeling: req.body.feeling,
+      frequentEmotion: req.body.frequentEmotion,
+      notes: req.body.notes,
+      user: user._id,
+    });
+    await user.log.push(newMood._id);
+    await user.save();
+    res.redirect(`/profile/${req.user.username}`);
+
+  } catch (err) {
+    console.log(err)
+  }
+
+});
+router.get('/profile/:username/:moodId', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
+  try {
+    const foundMood = await db.Mood.findById({ _id: req.params.moodId })
+    console.log(foundMood);
+    const context = { mood: foundMood };
+    res.render('mood/show', context)
+  } catch (err) {
+    console.log(err)
+  }
+
+})
 
 module.exports = router;

@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
     },
   },
   flower: { type: String, required: true, default: 'Sunflower' },
+  log: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Mood',
+  }]
 });
 
 const User = mongoose.model('User', userSchema);

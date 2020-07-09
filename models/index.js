@@ -15,4 +15,5 @@ mongoose.connect(connectionString, {
 
 module.exports = {
   User: require('./User'),
+  Mood: require('./Mood'),
 };
