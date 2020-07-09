@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .flower {
+      width: 100px;
+      height: 100px;
+    }
+
+    .stem {
+      width: 20px;
+      height: 60px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1><%=user.username%>'s Profile Page</h1>
+  <form action="/logout" method='GET'>
+    <input type="submit" value="Logout">
+  </form>
+  <div class="flower-container">
+    <div class="flower"
+      style='background-color: rgb(<%=user.petals.red%>, <%=user.petals.green%>, <%=user.petals.blue%>);'>
+      <%=user.flower%></div>
+    <div class="stem" style='background-color: rgb(<%=user.stem.red%>, <%=user.stem.green%>, <%=user.stem.blue%>);'>
+    </div>
+  </div>
+  <div class="form-container">
+
+  </div>
+</body>
+
+</html>

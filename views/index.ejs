@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Home Page</h1>
+  <form action="/signup" method='POST'>
+    <label for="username">Username</label>
+    <input required type="text" name='username'>
+
+    <label for="first">First Name</label>
+    <input required type="text" name='first'>
+
+    <label for="last">Last Name</label>
+    <input required type="text" name='last'>
+
+    <label for="flower">Flower</label>
+    <select required name='flower'>
+      <option value="" disabled selected hidden>Select...</option>
+      <option value="Sunflower">Sunflower</option>
+      <option value="Lotus">Lotus</option>
+      <option value="Cornflower">Cornflower</option>
+    </select>
+
+    <label for="email">Email</label>
+    <input type="email" name='email'>
+
+    <label for="password">Password</label>
+    <input type="password" name='password'>
+
+    <input type="Submit">
+  </form>
+</body>
+
+</html>

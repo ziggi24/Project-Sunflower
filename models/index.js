@@ -1,5 +1,5 @@
-
 const mongoose = require('mongoose');
+
 const connectionString = process.env.MONGODB_URI;
 
 mongoose.connect(connectionString, {
@@ -10,7 +10,7 @@ mongoose.connect(connectionString, {
 }).then(() => {
   console.log('mongo db connected...');
 }).catch((err) => {
-  console.log('mongo error ' + err);
+  console.log(`mongo error ${err}`);
 });
 
 module.exports = {

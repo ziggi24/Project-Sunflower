@@ -1,22 +1,20 @@
-const express = require('express')
-const morgan = require('morgan')
-const helmet = require('helmet')
+const express = require('express');
+const morgan = require('morgan');
+const helmet = require('helmet');
+const bcrypt = require('bcrypt')
+const flash = require('connect-flash');
+const passport = require('passport')
+const Strategy = require('passport-local').Strategy;
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT;
+const { PORT } = process.env;
 
 const db = require('./models');
-
-app.use(helmet());
-app.use(morgan('tiny'));
-app.use(express.json());
-app.use(express.static('./public'));
-app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({ extended: true }));
+const controllers = require('./controllers');
 
 app.use(session({
   store: new MongoStore({
@@ -30,10 +28,20 @@ app.use(session({
   },
 }));
 
+app.use(helmet());
+app.use(morgan('tiny'));
+app.use(express.json());
+app.use(express.static('./public'));
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(flash());
 
+app.get('/', (req, res) => {
+  res.render('index')
+})
+app.use('/', controllers.auth)
 
 app.listen(PORT, () => {
-  console.log(`Listening at http://localhost:${PORT}`)
-})
-
+  console.log(`Listening at http://localhost:${PORT}`);
+});
