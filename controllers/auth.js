@@ -1,12 +1,33 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 const flash = require('connect-flash');
+const multer = require('multer');
+const path = require('path');
 const passport = require('passport');
 const { Strategy } = require('passport-local');
+
 
 const router = express.Router();
 
 const db = require('../models');
+
+const storage = multer.diskStorage({
+  destination: './uploads/images',
+  filename: function (req, file, cb) {
+    crypto.pseudoRandomBytes(16, function (err, raw) {
+      if (err) return cb(err)
+
+      cb(null, raw.toString('hex') + path.extname(file.originalname))
+    })
+  }
+})
+
+const upload = multer({
+  dest: path.resolve(__dirname, './uploads/images'),
+  storage: storage,
+});
+
 
 // Configure the local strategy for use by Passport.
 // ( taken from the passport.js docs, refactored to be async
@@ -81,7 +102,7 @@ router.post('/signup', async (req, res, next) => {
     const hash = await bcrypt.hash(req.body.password, salt);
     req.body.password = hash;
     const newUser = await db.User.create(req.body);
-    res.redirect('/login', { user: newUser });
+    res.redirect('/login');
   } catch (err) {
     console.log(err);
     res.send({ message: 'Internal Server Error' });
@@ -124,6 +145,24 @@ router.post('/profile/:username', require('connect-ensure-login').ensureLoggedIn
     console.log(err);
   }
 });
+
+router.post('/profile/:username/upload', require('connect-ensure-login').ensureLoggedIn(), upload.single('photo'), async (req, res) => {
+  try {
+    const user = await db.User.findById({ _id: req.session.passport.user });
+    if (req.file) {
+      console.log(req.file)
+      user.image = req.file.path;
+      user.save();
+      res.redirect(`/profile/${user.username}`)
+    } else {
+      res.json({ message: 'couldnt find file' })
+    }
+  } catch (err) {
+    console.log(err);
+    return new Error(err);
+  }
+})
+
 router.get('/profile/:username/timeline', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {
     const user = await db.User.findById({ _id: req.session.passport.user });

@@ -36,6 +36,7 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Mood',
   }],
+  image: { data: Buffer, type: String, default: '' }
 });
 
 const User = mongoose.model('User', userSchema);

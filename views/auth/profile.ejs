@@ -14,10 +14,11 @@
 <body>
   <h1><%=user.username%>'s Profile Page</h1>
   <p><%=user.first%> started growing their flower on <%=user.dateJoined.toDateString()%></p>
-  <p></p>
+
   <form action="/logout" method='GET'>
     <input type="submit" value="Logout">
   </form>
+  <!-- removed img upload form -->
   <br>
   <main class='container'>
     <div class="left">

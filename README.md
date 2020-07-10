@@ -87,7 +87,8 @@ I'm thinking this is a good, softer, font for body text.
 - [tippy](https://atomiks.github.io/tippyjs/) - Tool Tips!
 - [morgan](https://github.com/expressjs/morgan) - better request logger
 - [passport](http://www.passportjs.org/) - external auth (google, fb, etc)
-- [node-postgres](https://node-postgres.com/) - postgres db middleware
+- [mongoose](https://www.npmjs.com/package/mongoose) - mongodb middleware
+- [multer](https://www.npmjs.com/package/multer) - photo upload middleware
 
 
 

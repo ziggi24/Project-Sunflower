@@ -12,47 +12,55 @@
 </head>
 
 <body>
-  <h1>Sunflower</h1>
-  <a href="/login">login</a>
-  <form action="/signup" method='POST'>
+  <%- include('./templates/header') %>
+  <main>
+    <div class="hero-image">
 
-    <p>
-      <label for="username">Username</label>
-      <input required type="text" name='username'>
-    </p>
+    </div>
+    <div class="form-container">
+      <form action="/signup" method='POST'>
 
-    <p>
-      <label for="first">First Name</label>
-      <input required type="text" name='first'>
-    </p>
+        <p>
+          <label for="username">Username</label>
+          <input required type="text" name='username'>
+        </p>
 
-    <p>
-      <label for="last">Last Name</label>
-      <input required type="text" name='last'>
-    </p>
+        <p>
+          <label for="first">First Name</label>
+          <input required type="text" name='first'>
+        </p>
 
-    <p>
-      <label for="flower">Flower</label>
-      <select required name='flower'>
-        <option value="" disabled selected hidden>Select...</option>
-        <option value="Sunflower">Sunflower</option>
-        <option value="Lotus">Lotus</option>
-        <option value="Cornflower">Cornflower</option>
-      </select>
-    </p>
+        <p>
+          <label for="last">Last Name</label>
+          <input required type="text" name='last'>
+        </p>
 
-    <p>
-      <label for="email">Email</label>
-      <input type="email" name='email'>
-    </p>
+        <p>
+          <label for="flower">Flower</label>
+          <select required name='flower'>
+            <option value="" disabled selected hidden>Select...</option>
+            <option value="Sunflower">Sunflower</option>
+            <option value="Lotus">Lotus</option>
+            <option value="Cornflower">Cornflower</option>
+          </select>
+        </p>
 
-    <p>
-      <label for="password">Password</label>
-      <input type="password" name='password'>
-    </p>
+        <p>
+          <label for="email">Email</label>
+          <input type="email" name='email'>
+        </p>
 
-    <p><input type="Submit"></p>
-  </form>
+        <p>
+          <label for="password">Password</label>
+          <input type="password" name='password'>
+        </p>
+
+        <p><input type="Submit"></p>
+      </form>
+    </div>
+  </main>
+
+
 </body>
 
 </html>

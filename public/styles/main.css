@@ -4,10 +4,33 @@ background: linear-gradient(180deg, rgba(252,229,176,1) 0%, rgba(203,234,255,1) 
   color: #1f1f1f;
   height: 100vh;
   font-family: 'Lato', sans-serif;
+  margin: 0px;
+}
+main {
+  top: 10vh;
 }
 h1{
   font-family: 'Playfair Display', sans-serif;
   font-style: italic;
   font-weight: 600;
   letter-spacing: 1px;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+.nav{
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 10vh;
+  background-color: #b8b8b8;
+  border-radius: 0 0 7px 7px;
+}
+.nav-left{
+  display: flex;
+  align-content: center;
 }
