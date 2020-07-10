@@ -4,7 +4,9 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   first: { type: String, required: true, minlength: 2 },
   last: { type: String, required: true, minlength: 2 },
-  email: { type: String, required: true, unique: true, minlength: 5 },
+  email: {
+    type: String, required: true, unique: true, minlength: 5,
+  },
   password: { type: String, required: true, minlength: 8 },
   dateJoined: { type: Date, required: true, default: Date.now() },
   petals: {
@@ -33,7 +35,7 @@ const userSchema = new mongoose.Schema({
   log: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Mood',
-  }]
+  }],
 });
 
 const User = mongoose.model('User', userSchema);

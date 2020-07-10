@@ -1,14 +1,16 @@
 const express = require('express');
-const router = express.Router();
 const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
-const passport = require('passport')
-const Strategy = require('passport-local').Strategy;
+const passport = require('passport');
+const { Strategy } = require('passport-local');
+
+const router = express.Router();
 
 const db = require('../models');
 
 // Configure the local strategy for use by Passport.
-// (taken from the passport.js docs, refactored to be async)
+// ( taken from the passport.js docs, refactored to be async
+//   and to use bcrypt to compare hashed passwords )
 //
 // The local strategy require a `verify` function which receives the credentials
 // (`username` and `password`) submitted by the user.  The function must verify
@@ -16,21 +18,17 @@ const db = require('../models');
 // will be set at `req.user` in route handlers after authentication.
 passport.use('local-login', new Strategy(async (username, password, next) => {
   try {
-    const user = await db.User.findOne({ username: username });
-    if (!user) { return next(null, false, { message: "Invalid Username" }); }
+    const user = await db.User.findOne({ username });
+    if (!user) { return next(null, false, { message: 'Invalid Username' }); }
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
       next(null, false, { message: 'Password or Email is incorrect.' });
     }
     return next(null, user);
   } catch (err) {
-    console.log(err)
-    next(null, false, { message: err.message })
+    console.log(err);
+    next(null, false, { message: err.message });
   }
-  db.User.findByUsername(username, function (err, user) {
-    if (err) { return next(err); }
-
-  });
 }));
 // Configure Passport authenticated session persistence.
 // (from passport.js docs)
@@ -40,12 +38,12 @@ passport.use('local-login', new Strategy(async (username, password, next) => {
 // typical implementation of this is as simple as supplying the user ID when
 // serializing, and querying the user record by ID from the database when
 // deserializing.
-passport.serializeUser(function (user, next) {
+passport.serializeUser((user, next) => {
   next(null, user.id);
 });
 
-passport.deserializeUser(function (id, next) {
-  db.User.findById(id, function (err, user) {
+passport.deserializeUser((id, next) => {
+  db.User.findById(id, (err, user) => {
     if (err) { return next(err); }
     next(null, user);
   });
@@ -54,19 +52,25 @@ passport.deserializeUser(function (id, next) {
 router.use(passport.initialize());
 router.use(passport.session());
 
+// login show route
 router.get('/login', (req, res) => {
   res.render('auth/login');
 });
 
-router.post('/login',
-  passport.authenticate('local-login', { failureRedirect: '/login' }), (req, res) => {
-    res.redirect(`/profile/${req.user.username}`);
-  });
+// Login post, passing auth to passport middleware
+router.post('/login', passport.authenticate('local-login', {
+  failureRedirect: '/login',
+}), (req, res) => {
+  res.redirect(`/profile/${req.user.username}`);
+});
 
+// logout passed to passport method logout
 router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
+
+// Signup Post
 router.post('/signup', async (req, res, next) => {
   try {
     const foundUser = await db.User.findOne({ email: req.body.email });
@@ -77,30 +81,32 @@ router.post('/signup', async (req, res, next) => {
     const hash = await bcrypt.hash(req.body.password, salt);
     req.body.password = hash;
     const newUser = await db.User.create(req.body);
-    res.redirect('/login');
+    res.redirect('/login', { user: newUser });
   } catch (err) {
     console.log(err);
-    res.send({ message: 'Internal Server Error' })
+    res.send({ message: 'Internal Server Error' });
   }
 });
 
+// profile show route
 router.get('/profile/:username', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {
-    console.log(req.session.passport.user)
+    console.log(req.session.passport.user);
     const user = await db.User.findById({ _id: req.session.passport.user });
     const context = {
-      user: user,
-    }
-    console.log(context)
+      user,
+    };
+    console.log(context);
     return res.render('auth/profile', context);
   } catch (err) {
-    console.log(err)
+    console.log(err);
     return res.json({
       message: err.message,
-    })
+    });
   }
 });
 
+// mood post route
 router.post('/profile/:username', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {
     const user = await db.User.findById({ _id: req.session.passport.user });
@@ -114,21 +120,45 @@ router.post('/profile/:username', require('connect-ensure-login').ensureLoggedIn
     await user.log.push(newMood._id);
     await user.save();
     res.redirect(`/profile/${req.user.username}`);
-
+  } catch (err) {
+    console.log(err);
+  }
+});
+router.get('/profile/:username/timeline', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
+  try {
+    const user = await db.User.findById({ _id: req.session.passport.user });
+    return res.render('auth/timeline', { user: user });
   } catch (err) {
     console.log(err)
+    return new Error(err);
   }
+})
 
-});
-router.get('/profile/:username/:moodId', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
+// mood show route
+router.get('/profile/:username/mood/:moodId', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {
-    const foundMood = await db.Mood.findById({ _id: req.params.moodId })
+    const foundMood = await db.Mood.findById({ _id: req.params.moodId });
     console.log(foundMood);
     const context = { mood: foundMood };
-    res.render('mood/show', context)
+    res.render('mood/show', context);
+  } catch (err) {
+    console.log(err);
+  }
+});
+router.get('/profile/:username/mood', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
+  try {
+    const user = await db.User.findById({ _id: req.session.passport.user }).populate('log');
+    const context = {
+      user: user,
+      log: user.log,
+    }
+    console.log(context);
+    return res.render('mood/index', context);
   } catch (err) {
     console.log(err)
+    return new Error(err);
   }
+
 
 })
 

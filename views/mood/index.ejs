@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunflower</title>
+</head>
+
+<body>
+  <h1><%=user.username%>'s Log</h1>
+  <a href="/profile/<%=user.username%>">profile</a>
+  <% log.forEach(entry => { %>
+  <div class="card">
+    <div class="card-title">
+      <h3><%=entry.dateAdded.toDateString()%></h3>
+    </div>
+    <div class="card-content">
+      <p>Mood: <%=entry.mood%></p>
+      <p>Outlook: <%=entry.outlook%></p>
+      <p>Feeling: <%=entry.frequentEmotion%></p>
+      <p>Notes: <%=entry.notes%></p>
+    </div>
+  </div>
+  <hr>
+  <br>
+  <% }) %>
+</body>
+
+</html>
