@@ -139,6 +139,11 @@ router.post('/profile/:username', require('connect-ensure-login').ensureLoggedIn
       user: user._id,
     });
     await user.log.push(newMood._id);
+    if (newMood.mood === 0) { user.petals.red += 20 }
+    else if (newMood.mood === 1) { user.petals.red += 10 }
+    else if (newMood.mood === 2) { user.petals.red += 5 }
+    else if (newMood.mood === 4) { user.petals.red -= 10 }
+    else if (newMood.mood === 5) { user.petals.red -= 20 }
     await user.save();
     res.redirect(`/profile/${req.user.username}`);
   } catch (err) {
@@ -146,6 +151,7 @@ router.post('/profile/:username', require('connect-ensure-login').ensureLoggedIn
   }
 });
 
+// profile picture update route 
 router.post('/profile/:username/upload', require('connect-ensure-login').ensureLoggedIn(), upload.single('photo'), async (req, res) => {
   try {
     const user = await db.User.findById({ _id: req.session.passport.user });
