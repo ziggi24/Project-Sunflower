@@ -10,6 +10,8 @@
 
 <body>
   <h1><%=user.username%>'s Profile Page</h1>
+  <p><%=user.first%> started growing their flower on <%=user.dateJoined.toDateString()%></p>
+  <p></p>
   <form action="/logout" method='GET'>
     <input type="submit" value="Logout">
   </form>
@@ -37,8 +39,8 @@
             <input type="number" name="mood">
           </p>
           <p>
-            <label for="feeling">Feeling</label>
-            <input type="number" name="feeling">
+            <label for="outlook">Outlook</label>
+            <input type="number" name="outlook">
           </p>
           <p>
             <label for="frequentEmotion">Frequent Emotion</label>

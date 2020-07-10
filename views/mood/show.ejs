@@ -9,9 +9,9 @@
 
 <body>
   <h1>Mood Show Page</h1>
-  <p>Date: <%= mood.dateAdded%></p>
+  <p>Date: <%= mood.dateAdded.toDateString()%></p>
   <p>Mood: <%= mood.mood%></p>
-  <p>feeling: <%= mood.feeling%></p>
+  <p>Outlook: <%= mood.outlook%></p>
   <p>Frequent Emotion: <%= mood.frequentEmotion%></p>
   <p>Notes: <%= mood.notes%></p>
 

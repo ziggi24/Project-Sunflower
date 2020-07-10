@@ -106,7 +106,7 @@ router.post('/profile/:username', require('connect-ensure-login').ensureLoggedIn
     const user = await db.User.findById({ _id: req.session.passport.user });
     const newMood = await db.Mood.create({
       mood: req.body.mood,
-      feeling: req.body.feeling,
+      outlook: req.body.outlook,
       frequentEmotion: req.body.frequentEmotion,
       notes: req.body.notes,
       user: user._id,

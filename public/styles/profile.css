@@ -25,3 +25,14 @@ background: linear-gradient(180deg, rgba(252,229,176,1) 0%, rgba(203,234,255,1) 
 .left {
   width: 40vw;
 }
+.form-container {
+  text-align: justify;
+  padding: 10px;
+  margin: 2px;
+  background-color: #f1f1f1;
+  border-radius: 15px;
+  border: 1px solid #e9e9e9;
+}
+.input{
+  width: 100%;
+}
