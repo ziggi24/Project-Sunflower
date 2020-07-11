@@ -73,6 +73,15 @@ passport.deserializeUser((id, next) => {
 router.use(passport.initialize());
 router.use(passport.session());
 
+// homepage route
+router.get('/', (req, res) => {
+  const context = {
+    isLogged: req.isAuthenticated(),
+  }
+  console.log(context);
+  res.render('index', context);
+});
+
 // login show route
 router.get('/login', (req, res) => {
   res.render('auth/login');

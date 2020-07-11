@@ -7,12 +7,19 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
     rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+  <script src="/semantic/dist/semantic.min.js"></script>
   <link rel="stylesheet" href="/styles/main.css">
   <title>Sunflower</title>
 </head>
 
 <body>
+  <% if(isLogged) {%>
   <%- include('./templates/header') %>
+  <%} else { %>
+  <%- include('./templates/headerUnlogged') %>
+  <%}%>
   <main>
     <div class="hero-image">
 
