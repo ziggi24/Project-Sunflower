@@ -23,15 +23,15 @@ h1{
   display: flex;
   flex-direction: row;
 }
-.right {
+/* .right {
   width: 30vw;
-  /* justify-self: flex-end; */
+  justify-self: flex-end; 
   align-self: flex-start;
-}
-.left {
+} */
+/* .left {
   width: 40vw;
   max-width: 550px;
-}
+} */
 .form-container {
   text-align: justify;
   padding: 10px;

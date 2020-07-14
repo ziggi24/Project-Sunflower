@@ -17,13 +17,25 @@
 
 <body>
   <%- include('../templates/header') %>
-  <h1>Mood Show Page</h1>
-  <p>Date: <%= mood.dateAdded.toDateString()%></p>
-  <p>Mood: <%= mood.mood%></p>
-  <p>Outlook: <%= mood.outlook%></p>
-  <p>Frequent Emotion: <%= mood.frequentEmotion%></p>
-  <p>Notes: <%= mood.notes%></p>
+  
+  <div class="ui one column stackable center aligned page grid">
+    <div class="column twelve wide">
+      <!-- <div class="ui card"> -->
+        <!-- <div class="ui card content"> -->
+          <p>Date: <%= mood.dateAdded.toDateString()%></p>
+          <p>Mood: <%= mood.mood%></p>
+          <p>Outlook: <%= mood.outlook%></p>
+          <p>Frequent Emotion: <%= mood.frequentEmotion%></p>
+          <p>Notes: <%= mood.notes%></p>
+        <!-- </div> -->
+      <!-- </div> -->
+    </div>
+ </div>
 
+    
+
+  
+  <%- include('../templates/footer') %>
 </body>
 
 </html>

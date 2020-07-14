@@ -17,27 +17,35 @@
 
 <body>
   <%- include('../templates/header') %>
-  <h1><%=user.username%>'s Log</h1>
-<div class="ui container">
-  <div class="ui cards column">
-    <% log.forEach(entry => { %>
-    <div class="card">
-      <div class="header">
-        <h3><a href="/profile/<%=user.username%>/mood/<%=entry._id%>"><%=entry.dateAdded.toDateString()%></a></h3>
-      </div>
-      <div class="content">
-        <p>Mood: <%=entry.mood%></p>
-        <p>Outlook: <%=entry.outlook%></p>
-        <p>Feeling: <%=entry.frequentEmotion%></p>
-        <p>Notes: <%=entry.notes%></p>
-      </div>
+  <div class="ui one column stackable center aligned page grid">
+    <div class="column twelve wide">
+      <% log.forEach(entry => { %>
+        <div class="ui card column center aligned">
+          <div class="header content">
+            <h3><a href="/profile/<%=user.username%>/mood/<%=entry._id%>"><%=entry.dateAdded.toDateString()%></a></h3>
+          </div>
+          <div class="content">
+            <p class='left aligned'>Mood: <%=entry.mood%></p>
+            <p class='left aligned'>Outlook: <%=entry.outlook%></p>
+            <p class='left aligned'>Feeling: <%=entry.frequentEmotion%></p>
+            <p class='left aligned'>Notes: <%=entry.notes%></p>
+          </div>
+          <div class="extra content">
+            <div class="ui two buttons">
+              <div class="ui basic yellow button">Edit</div>
+              <div class="ui basic red button">Delete</div>
+            </div>
+          </div>
+        </div>
+    
+        <% }) %>
     </div>
-    <hr>
-    <br>
-    <% }) %>
-  </div>
-</div>
-  
+ </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <%- include('../templates/footer') %>
 </body>
 
 </html>

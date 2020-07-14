@@ -230,7 +230,8 @@ router.post('/profile/:username/upload', require('connect-ensure-login').ensureL
 router.get('/profile/:username/timeline', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {
     const user = await db.User.findById({ _id: req.session.passport.user });
-    return res.render('auth/timeline', { user: user });
+    const log = await db.Mood.find({user: user._id}).sort({dateAdded: 'desc'})
+    return res.render('auth/timeline', { user: user, log: log });
   } catch (err) {
     console.log(err)
     return new Error(err);
