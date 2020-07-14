@@ -17,8 +17,9 @@
 
 <body>
   <%- include('../templates/header') %>
-  <h1><%=user.username%>'s Flower</h1>
-  <div class="flower-container">
+  
+  <div class="ui container center flower-container">
+    <h1><%=user.username%>'s Flower</h1>
     <div class="flower"
       style='background-color: rgb(<%=user.petals.red%>, <%=user.petals.green%>, <%=user.petals.blue%>);'>
       <%=user.flower%></div>

@@ -17,42 +17,80 @@
 </head>
 <body>
   <%- include('../templates/header') %>
-  <h1><%=user.username%>'s Profile Page</h1>
-  <p><%=user.first%> started growing their flower on <%=user.dateJoined.toDateString()%></p>
+  
   <!-- removed img upload form -->
   <br>
-  <main class='container'>
-    <div class="left">
-      <canvas id="moodChart" width="400" height="400"></canvas>
-      <br>
-      <canvas id="outlookChart" width="400" height="400"></canvas>
-      <br>
-      <canvas id="emotionsChart" width="400" height="400"></canvas>
-    </div>
-    <div class="right">
-      <br>
-      <div class="form-container">
-        <form action='/profile/<%=user.username%>' method='POST'>
-          <p>
-            <label for="mood">Mood</label>
-            <input type="number" name="mood">
-          </p>
-          <p>
-            <label for="outlook">Outlook</label>
-            <input type="number" name="outlook">
-          </p>
-          <p>
-            <label for="frequentEmotion">Frequent Emotion</label>
-            <input type="text" name="frequentEmotion">
-          </p>
-          <p>
-            <label for="notes">Notes</label>
-            <input type="text" name="notes">
-          </p>
-          <input type="submit" value="Log Mood">
-        </form>
+  <main class='ui container'>
+      <p>You started growing your flower on <%=user.dateJoined.toDateString()%></p>
+    <div class='ui two column stackable grid'>
+      <div class="ui column left">
+        <div class="ui top attached tabular menu">
+          <a class="item active" data-tab="first">Mood Data</a>
+          <a class="item" data-tab="second">Outlook Data</a>
+          <a class="item" data-tab="third">Frequent Emotions</a>
+        </div>
+        <div class="ui bottom attached tab segment active" data-tab="first">
+          <canvas id="moodChart" width="400" height="400"></canvas>
+        </div>
+        <div class="ui bottom attached tab segment" data-tab="second">
+          <canvas id="outlookChart" width="400" height="400"></canvas>
+        </div>
+        <div class="ui bottom attached tab segment" data-tab="third">
+          <canvas id="emotionsChart" width="400" height="400"></canvas>
+        </div>
+      </div>
+      <div class="ui column right">
+        <br>
+        <div class="form-container">
+          <h3 class="ui center aligned header">How are you today?</h3>
+          <hr>
+          <form class='ui form' action='/profile/<%=user.username%>' method='POST'>
+            <p>
+              <div class="ui selection dropdown">
+                <input type="hidden" name="mood">
+                <i class="dropdown icon"></i>
+                <div class="default text">Mood</div>
+                <div class="menu">
+                  <div class="item" data-value="1">Awful</div>
+                  <div class="item" data-value="2">Not Great</div>
+                  <div class="item" data-value="3">Okay</div>
+                  <div class="item" data-value="4">Good</div>
+                  <div class="item" data-value="5">Awesome!</div>
+                </div>
+              </div>
+            </p>
+            <p>
+              <div class="ui selection dropdown">
+                <input type="hidden" name="outlook">
+                <i class="dropdown icon"></i>
+                <div class="default text">Outlook</div>
+                <div class="menu">
+                  <div class="item" data-value="1">Stuck</div>
+                  <div class="item" data-value="2">Uncertain</div>
+                  <div class="item" data-value="3">Meh</div>
+                  <div class="item" data-value="4">Hopeful</div>
+                  <div class="item" data-value="5">Excited</div>
+                </div>
+              </div>
+            </p>
+            <p>
+              <div class="ui input">
+                <!-- <label for="frequentEmotion">Frequent Emotion</label> -->
+                <input type="text" name="frequentEmotion" placeholder="Frequent Emotion">
+              </div>
+            </p>
+            <p>
+              <div class="ui input">
+                <!-- <label for="notes">Notes</label> -->
+                <textarea rows="3" type="text" name="notes" placeholder="Notes..."></textarea>
+              </div>
+            </p>
+            <input class='ui secondary button' type="submit" value="Log Mood">
+          </form>
+        </div>
       </div>
     </div>
+    
 
   </main>
   <%- include('../templates/footer') %>
@@ -61,9 +99,9 @@
     var myChart = new Chart(ctx1, {
       type: 'bar',
       data: {
-        labels: ['Awful', 'Meh', 'Okay', 'Good', 'Awesome'],
+        labels: ['Awful', 'Not Great', 'Okay', 'Good', 'Awesome'],
         datasets: [{
-          label: 'Mood Frequency',
+          label: 'Frequency',
           data: <%- JSON.stringify(moodData) %>,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -100,7 +138,7 @@
       data: {
         labels: ['Stuck', 'Uncertain', 'Meh', 'Hopeful', 'Excited'],
         datasets: [{
-          label: 'Outlook Frequency',
+          label: 'Frequency',
           data: <%- JSON.stringify(outlookData) %>,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -135,11 +173,10 @@
     var myPieChart = new Chart(ctx3, {
       type: 'pie',
       data: {
+        labels: <%- JSON.stringify(emotionsLabel) %>,
         datasets: [{
           data: <%- JSON.stringify(emotionsData) %>,
-        }],
-        labels: <%- JSON.stringify(emotionsLabel) %>,
-        backgroundColor: [
+          backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
             'rgba(255, 206, 86, 0.2)',
@@ -155,6 +192,7 @@
             'rgba(153, 102, 255, 1)',
             'rgba(255, 159, 64, 1)'
           ],
+        }],
       }
     });
   </script>

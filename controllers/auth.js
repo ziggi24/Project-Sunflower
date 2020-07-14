@@ -82,7 +82,7 @@ const calcOccur = (arr, uniques) =>{
     for (let j = 0; j < arr.length; j++){
       if(uniques[i] === arr[j]){
         finalArr[i] +=1 || 0;
-        console.log(finalArr)
+        // console.log(finalArr)
       }
     }
   }
@@ -275,12 +275,14 @@ router.post('/profile/:username/mood/:moodId', require('connect-ensure-login').e
     console.log(err);
   }
 });
+// Mood index route
 router.get('/profile/:username/mood', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {
-    const user = await db.User.findById({ _id: req.session.passport.user }).populate('log');
+    const user = await db.User.findById({ _id: req.session.passport.user });
+    const log = await db.Mood.find({user: user._id}).sort({dateAdded: 'desc'})
     const context = {
       user: user,
-      log: user.log,
+      log: log,
     }
     console.log(context);
     return res.render('mood/index', context);

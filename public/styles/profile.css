@@ -1,6 +1,5 @@
 body {
-  background: rgb(226,243,255);
-background: linear-gradient(180deg, rgba(252,229,176,1) 0%, rgba(203,234,255,1) 30%,  rgba(226,243,255,1) 100%);
+  background-color: #FCEBB6;
   color: #1f1f1f;
   height: 100vh;
   font-family: 'Lato', sans-serif;
@@ -31,6 +30,7 @@ h1{
 }
 .left {
   width: 40vw;
+  max-width: 550px;
 }
 .form-container {
   text-align: justify;

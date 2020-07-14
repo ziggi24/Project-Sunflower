@@ -18,4 +18,17 @@ if(location.href.includes('/mood')){
   $('.timeline').removeClass('active')
   $('.mood').removeClass('active')
   $('.main').addClass('active')
+  $('.menu .item')
+  .tab()
+;
 }
+
+$('.dropdown')
+  .dropdown({
+    // you can use any ui transition
+    transition: 'slide down'
+  })
+;
+// $('.menu .item')
+//   .tab()
+// ;

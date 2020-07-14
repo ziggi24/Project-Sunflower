@@ -18,24 +18,26 @@
 <body>
   <%- include('../templates/header') %>
   <h1><%=user.username%>'s Log</h1>
-
-  <div class="ui cards">
-  <% log.forEach(entry => { %>
-  <div class="card">
-    <div class="header">
-      <h3><a href="/profile/<%=user.username%>/mood/<%=entry._id%>"><%=entry.dateAdded.toDateString()%></a></h3>
+<div class="ui container">
+  <div class="ui cards column">
+    <% log.forEach(entry => { %>
+    <div class="card">
+      <div class="header">
+        <h3><a href="/profile/<%=user.username%>/mood/<%=entry._id%>"><%=entry.dateAdded.toDateString()%></a></h3>
+      </div>
+      <div class="content">
+        <p>Mood: <%=entry.mood%></p>
+        <p>Outlook: <%=entry.outlook%></p>
+        <p>Feeling: <%=entry.frequentEmotion%></p>
+        <p>Notes: <%=entry.notes%></p>
+      </div>
     </div>
-    <div class="content">
-      <p>Mood: <%=entry.mood%></p>
-      <p>Outlook: <%=entry.outlook%></p>
-      <p>Feeling: <%=entry.frequentEmotion%></p>
-      <p>Notes: <%=entry.notes%></p>
-    </div>
+    <hr>
+    <br>
+    <% }) %>
   </div>
-  <hr>
-  <br>
-  <% }) %>
 </div>
+  
 </body>
 
 </html>
