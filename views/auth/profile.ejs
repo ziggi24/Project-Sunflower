@@ -4,30 +4,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
     rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+  <script src="/semantic/dist/semantic.min.js"></script>
+  <script src='/scripts/app.js' defer></script>
   <link rel="stylesheet" href="/styles/profile.css">
   <title>Document</title>
 </head>
-
 <body>
+  <%- include('../templates/header') %>
   <h1><%=user.username%>'s Profile Page</h1>
   <p><%=user.first%> started growing their flower on <%=user.dateJoined.toDateString()%></p>
-
-  <form action="/logout" method='GET'>
-    <input type="submit" value="Logout">
-  </form>
   <!-- removed img upload form -->
   <br>
   <main class='container'>
     <div class="left">
-      <div class="flower-container">
-        <h3><a href="/profile/<%=user.username%>/timeline">My Flower</a></h3>
-      </div>
-      <h3><a href="/profile/<%=user.username%>/mood">Mood Log</a></h3>
+      <canvas id="moodChart" width="400" height="400"></canvas>
+      <br>
+      <canvas id="outlookChart" width="400" height="400"></canvas>
+      <br>
+      <canvas id="emotionsChart" width="400" height="400"></canvas>
     </div>
     <div class="right">
+      <br>
       <div class="form-container">
         <form action='/profile/<%=user.username%>' method='POST'>
           <p>
@@ -52,6 +55,109 @@
     </div>
 
   </main>
+  <%- include('../templates/footer') %>
+  <script>
+    var ctx1 = document.getElementById('moodChart').getContext('2d');
+    var myChart = new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: ['Awful', 'Meh', 'Okay', 'Good', 'Awesome'],
+        datasets: [{
+          label: 'Mood Frequency',
+          data: <%- JSON.stringify(moodData) %>,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+    var ctx2 = document.getElementById('outlookChart').getContext('2d');
+    var myChart = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['Stuck', 'Uncertain', 'Meh', 'Hopeful', 'Excited'],
+        datasets: [{
+          label: 'Outlook Frequency',
+          data: <%- JSON.stringify(outlookData) %>,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+    var ctx3 = document.getElementById('emotionsChart').getContext('2d');
+    var myPieChart = new Chart(ctx3, {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: <%- JSON.stringify(emotionsData) %>,
+        }],
+        labels: <%- JSON.stringify(emotionsLabel) %>,
+        backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+      }
+    });
+  </script>
 </body>
 
 </html>

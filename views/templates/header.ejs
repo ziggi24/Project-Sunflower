@@ -1,6 +1,12 @@
 <div class="ui secondary pointing menu">
-  <a class="active item">
+  <a class="active item main" href='/profile/<%=user.username%>'>
     <h1>Sunflower</h1>
+  </a>
+  <a class="item timeline" href='/profile/<%=user.username%>/timeline'>
+    <h1>My Flower</h1>
+  </a>
+  <a class="item mood" href='/profile/<%=user.username%>/mood'>
+    <h1>Mood Log</h1>
   </a>
 
   <div class="right menu">

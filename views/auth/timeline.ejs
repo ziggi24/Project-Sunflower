@@ -7,20 +7,33 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
     rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+  <script src="/semantic/dist/semantic.min.js"></script>
+  <script src='/scripts/app.js' defer></script>
   <link rel="stylesheet" href="/styles/profile.css">
   <title>Sunflower</title>
 </head>
 
 <body>
+  <%- include('../templates/header') %>
   <h1><%=user.username%>'s Flower</h1>
   <div class="flower-container">
     <div class="flower"
       style='background-color: rgb(<%=user.petals.red%>, <%=user.petals.green%>, <%=user.petals.blue%>);'>
       <%=user.flower%></div>
     <% for( let index = 0; index < user.log.length; index++ ) { %>
-    <a href="/profile/<%=user.username%>/mood/<%=user.log[index]._id%>">
-      <div class="stem" style='background-color: rgb(<%=user.stem.red%>, <%=user.stem.green%>, <%=user.stem.blue%>);'>
-      </div>
+      <% if (index % 2 === 0) { %>
+        <a href="/profile/<%=user.username%>/mood/<%=user.log[index]._id%>">
+          <div class="stem" >
+            <img src="/svg/vine1.svg" width='50px' height="100px" alt="">
+          </div>
+      <% } else {%>
+        <a href="/profile/<%=user.username%>/mood/<%=user.log[index]._id%>">
+          <div class="stem" >
+            <img src="/svg/vine1.svg" style="transform: rotate(180deg);" width="50px" height="100px" alt="">
+          </div>
+        <%}%>
     </a>
     <% } %>
   </div>

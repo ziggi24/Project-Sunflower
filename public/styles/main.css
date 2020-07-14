@@ -15,22 +15,9 @@ h1{
   font-weight: 600;
   letter-spacing: 1px;
 }
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%
-}
-.nav{
-  margin: 0;
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 10vh;
-  background-color: #b8b8b8;
-  border-radius: 0 0 7px 7px;
-}
-.nav-left{
-  display: flex;
-  align-content: center;
-}
+
+.footer{
+  position:fixed;
+  bottom:0;
+  background-image: url('../img/footer.png');
+ }

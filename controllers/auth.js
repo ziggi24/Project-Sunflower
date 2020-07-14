@@ -73,13 +73,42 @@ passport.deserializeUser((id, next) => {
 router.use(passport.initialize());
 router.use(passport.session());
 
-// homepage route
-router.get('/', (req, res) => {
-  const context = {
-    isLogged: req.isAuthenticated(),
+const unique = (value, index, self) => {
+  return self.indexOf(value) === index
+}
+const calcOccur = (arr, uniques) =>{
+  let finalArr = new Array(uniques.length).fill(0);
+  for(let i = 0; i < uniques.length; i++){
+    for (let j = 0; j < arr.length; j++){
+      if(uniques[i] === arr[j]){
+        finalArr[i] +=1 || 0;
+        console.log(finalArr)
+      }
+    }
   }
-  console.log(context);
-  res.render('index', context);
+  return finalArr;
+}
+
+// homepage route
+router.get('/', async (req, res) => {
+  try {
+    if(req.isAuthenticated()){
+      const user = await db.User.findById({ _id: req.session.passport.user })
+      const context = {
+        user: user,
+      }
+      console.log(context);
+      res.render('index', context);
+    } else {
+      const context = {
+        user: null,
+      }
+      res.render('index', context);
+    }
+  } catch (err) {
+    console.log(err)
+  }
+  
 });
 
 // login show route
@@ -118,13 +147,33 @@ router.post('/signup', async (req, res, next) => {
   }
 });
 
+// TODO Add /profile redirect here
+router.get('/profile',require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
+  try {
+    const user = await db.User.findById({ _id: req.session.passport.user });
+    return res.redirect(`/profile/${req.user.username}`);
+   } catch (err) {
+      console.log(err)
+   }
+  });
+
+
 // profile show route
 router.get('/profile/:username', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {
     console.log(req.session.passport.user);
-    const user = await db.User.findById({ _id: req.session.passport.user });
+    const user = await db.User.findById({ _id: req.session.passport.user }).populate('log');
+    const moodData = calcOccur(user.log.map(entry => entry.mood),[1,2,3,4,5]);
+    const outlookData = calcOccur(user.log.map(entry => entry.outlook),[1,2,3,4,5]);
+    const emotionsLabel = user.log.map(entry => entry.frequentEmotion).filter(unique);
+    const emotionsData = calcOccur(user.log.map(entry => entry.frequentEmotion), emotionsLabel);
+
     const context = {
       user,
+      moodData,
+      outlookData,
+      emotionsData,
+      emotionsLabel,
     };
     console.log(context);
     return res.render('auth/profile', context);
@@ -191,9 +240,36 @@ router.get('/profile/:username/timeline', require('connect-ensure-login').ensure
 // mood show route
 router.get('/profile/:username/mood/:moodId', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {
+    const user = await db.User.findById({ _id: req.session.passport.user })
     const foundMood = await db.Mood.findById({ _id: req.params.moodId });
     console.log(foundMood);
-    const context = { mood: foundMood };
+    const context = { 
+      user: user,
+      mood: foundMood 
+    };
+    res.render('mood/show', context);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// Mood post route for updates
+router.post('/profile/:username/mood/:moodId', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
+  try {
+    const user = await db.User.findById({ _id: req.session.passport.user })
+    const foundMood = await db.Mood.findById({ _id: req.params.moodId });
+    console.log(foundMood);
+    foundMood = {
+      mood: req.body.mood,
+      outlook: req.body.outlook,
+      frequentEmotion: req.body.frequentEmotion,
+      notes: req.body.notes,
+    }
+    await foundMood.save()
+    const context = { 
+      user: user,
+      mood: foundMood 
+    };
     res.render('mood/show', context);
   } catch (err) {
     console.log(err);

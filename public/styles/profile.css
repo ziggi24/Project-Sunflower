@@ -17,7 +17,7 @@ h1{
 }
 .stem{
   width: 20px;
-  height: 60px;
+  height: 95px;
   margin-bottom: 1px;
 }
 .container {
@@ -43,3 +43,15 @@ h1{
 .input{
   width: 100%;
 }
+.footer{
+  margin-top: 40px;
+  position:fixed;
+  width: 100vw;
+  height: 40px;
+  bottom: 0;
+  background-image: url('../img/footer.png');
+  background-size: contain;
+  background-repeat: repeat-x;
+  resize: both;
+  overflow: scroll;
+ }

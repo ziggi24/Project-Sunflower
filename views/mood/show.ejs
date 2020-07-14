@@ -7,10 +7,16 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
     rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+  <script src="/semantic/dist/semantic.min.js"></script>
+  <script src='/scripts/app.js' defer></script>
+  <link rel="stylesheet" href="/styles/profile.css">
   <title>Sunflower</title>
 </head>
 
 <body>
+  <%- include('../templates/header') %>
   <h1>Mood Show Page</h1>
   <p>Date: <%= mood.dateAdded.toDateString()%></p>
   <p>Mood: <%= mood.mood%></p>
