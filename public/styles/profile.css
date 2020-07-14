@@ -52,6 +52,6 @@ h1{
   background-image: url('../img/footer.png');
   background-size: contain;
   background-repeat: repeat-x;
-  resize: both;
-  overflow: scroll;
+  /* resize: both; */
+  /* overflow: scroll; */
  }

@@ -10,6 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
   <script src="/semantic/dist/semantic.min.js"></script>
+  <script src='/scripts/app.js' defer></script>
   <link rel="stylesheet" href="/styles/main.css">
   <title>Sunflower</title>
 </head>
@@ -21,49 +22,66 @@
   <%- include('./templates/headerUnlogged') %>
   <%}%>
   <main>
-    <div class="hero-image">
 
-    </div>
-    <div class="form-container">
-      <form action="/signup" method='POST'>
+    <div class='ui middle aligned center aligned grid'>
 
-        <p>
-          <label for="username">Username</label>
-          <input required type="text" name='username'>
-        </p>
-
-        <p>
-          <label for="first">First Name</label>
-          <input required type="text" name='first'>
-        </p>
-
-        <p>
-          <label for="last">Last Name</label>
-          <input required type="text" name='last'>
-        </p>
-
-        <p>
-          <label for="flower">Flower</label>
-          <select required name='flower'>
-            <option value="" disabled selected hidden>Select...</option>
-            <option value="Sunflower">Sunflower</option>
-            <option value="Lotus">Lotus</option>
-            <option value="Cornflower">Cornflower</option>
-          </select>
-        </p>
-
-        <p>
-          <label for="email">Email</label>
-          <input type="email" name='email'>
-        </p>
-
-        <p>
-          <label for="password">Password</label>
-          <input type="password" name='password'>
-        </p>
-
-        <p><input type="Submit"></p>
-      </form>
+      <div class="column">
+        <h1 class='ui header'>Sign Up</h1>
+        <form class='form' action="/signup" method='POST'>
+          <div class='ui segment'>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class='user icon'></i>
+                <input type="text" name='username' placeholder="Username">
+              </div>
+            </div>
+            <br>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class='user icon'></i>
+                <input type="text" name='first' placeholder="First Name">
+              </div>
+            </div>
+            <br>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class='user icon'></i>
+                <input type="text" name='last' placeholder="Last Name">
+              </div>
+            </div>
+            <br>
+            <div class="field">
+              <div class="ui selection dropdown">
+                <input type="hidden" name="flower">
+                <i class="dropdown icon"></i>
+                <div class="default text">Flower</div>
+                <div class="menu">
+                  <div class="item" data-value="Sunflower">Sunflower</div>
+                  <div class="item" data-value="Lotus">Lotus</div>
+                  <div class="item" data-value="Cornflower">Cornflower</div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class='lock icon'></i>
+                <input type="text" name='email' placeholder="Email">
+              </div>
+            </div>
+            <br>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class='lock icon'></i>
+                <input type="password" name='password' placeholder="Password">
+              </div>
+            </div>
+            
+          </div>
+          <input class='ui fluid select olive button' type="submit" value="Sign Up">
+        </form>
+      </div>
+      
     </div>
   </main>
 

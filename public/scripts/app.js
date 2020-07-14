@@ -12,7 +12,7 @@ if(location.href.includes('/mood')){
   $('.timeline').removeClass('active')
   $('.mood').removeClass('active')
   $('.timeline').addClass('active')
-} else {
+} else if (location.href.includes('/profile')) {
   console.log('else')
   $('.main').removeClass('active')
   $('.timeline').removeClass('active')

@@ -7,19 +7,41 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
     rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+  <script src="/semantic/dist/semantic.min.js"></script>
+  <script src='/scripts/app.js' defer></script>
   <link rel="stylesheet" href="/styles/main.css">
-  <title>Document</title>
+  <title>Sunflower</title>
 </head>
 
 <body>
-  <h1>Login Page</h1>
-  <form action="/login" method='POST'>
-    <label for="username">Username</label>
-    <input type="text" name='username'>
-    <label for="password">Password</label>
-    <input type="password" name='password'>
-    <input type="submit" value="Login">
-  </form>
+
+  <div class='ui middle aligned center aligned grid'>
+    <div class="column">
+      <h1 class='ui header'>Login</h1>
+      <form class='form' action="/login" method='POST'>
+        <div class='ui segment'>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class='user icon'></i>
+              <input type="text" name='username' placeholder="Username">
+            </div>
+          </div>
+          <br>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class='lock icon'></i>
+              <input type="password" name='password' placeholder="Password">
+            </div>
+          </div>
+          
+        </div>
+        <input class='ui fluid select olive button' type="submit" value="Login">
+      </form>
+    </div>
+  </div>
+  
 </body>
 
 </html>

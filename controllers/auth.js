@@ -132,6 +132,7 @@ router.get('/logout', (req, res) => {
 // Signup Post
 router.post('/signup', async (req, res, next) => {
   try {
+    console.log(req.body);
     const foundUser = await db.User.findOne({ email: req.body.email });
     if (foundUser) {
       return res.send({ message: 'Email is already in use' });
