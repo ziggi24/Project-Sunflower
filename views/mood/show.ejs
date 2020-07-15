@@ -20,15 +20,25 @@
   
   <div class="ui one column stackable center aligned page grid">
     <div class="column twelve wide">
-      <!-- <div class="ui card"> -->
-        <!-- <div class="ui card content"> -->
-          <p>Date: <%= mood.dateAdded.toDateString()%></p>
-          <p>Mood: <%= mood.mood%></p>
-          <p>Outlook: <%= mood.outlook%></p>
-          <p>Frequent Emotion: <%= mood.frequentEmotion%></p>
-          <p>Notes: <%= mood.notes%></p>
-        <!-- </div> -->
-      <!-- </div> -->
+      <div class="ui card centered">
+        <div class="header content">
+          <h3><%= mood.dateAdded.toDateString()%></h3>
+        </div>
+        <div class="ui card content">
+          <p class='left aligned'>Mood: <%= mood.mood%></p>
+          <p class='left aligned'>Outlook: <%= mood.outlook%></p>
+          <p class='left aligned'>Frequent Emotion: <%= mood.frequentEmotion%></p>
+          <p class='left aligned'>Notes: <%= mood.notes%></p>
+        </div>
+        <div class="extra content">
+          <div class="ui two buttons">
+            <a href='/profile/<%=user.username%>/mood/<%=mood._id%>/update' class="ui inverted yellow button">Edit</a>
+            <form action="/profile/<%=user.username%>/mood/<%=mood._id%>/delete?_method=DELETE" method='POST'>
+              <input class="ui inverted red button" type="submit" value="Delete">
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
  </div>
 

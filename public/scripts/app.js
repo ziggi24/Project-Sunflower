@@ -27,8 +27,7 @@ $('.dropdown')
   .dropdown({
     // you can use any ui transition
     transition: 'slide down'
-  })
-;
+  });
 // $('.menu .item')
 //   .tab()
 // ;

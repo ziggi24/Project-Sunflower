@@ -18,9 +18,9 @@
 <body>
   <%- include('../templates/header') %>
   <div class="ui one column stackable center aligned page grid">
-    <div class="column twelve wide">
+    <div class="ui two column centered grid">
       <% log.forEach(entry => { %>
-        <div class="ui card column center aligned">
+        <div class="ui card centered">
           <div class="header content">
             <h3><a href="/profile/<%=user.username%>/mood/<%=entry._id%>"><%=entry.dateAdded.toDateString()%></a></h3>
           </div>
@@ -30,12 +30,7 @@
             <p class='left aligned'>Feeling: <%=entry.frequentEmotion%></p>
             <p class='left aligned'>Notes: <%=entry.notes%></p>
           </div>
-          <div class="extra content">
-            <div class="ui two buttons">
-              <div class="ui basic yellow button">Edit</div>
-              <div class="ui basic red button">Delete</div>
-            </div>
-          </div>
+          <!-- buttons here? -->
         </div>
     
         <% }) %>

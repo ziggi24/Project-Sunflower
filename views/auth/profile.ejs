@@ -41,7 +41,11 @@
       </div>
       <div class="ui column right">
         <br>
-        <br>
+        <div class="ui container olive">
+        <a href="/profile/<%=user.username%>/update">
+          <i class="edit outline icon"></i>
+        </a>
+      </div>
         <div class="form-container">
           <h3 class="ui center aligned header">How are you today?</h3>
           <hr>
@@ -52,27 +56,26 @@
                 <i class="dropdown icon"></i>
                 <div class="default text">Mood</div>
                 <div class="menu">
-                  <div class="item" data-value="1">Awful</div>
-                  <div class="item" data-value="2">Not Great</div>
-                  <div class="item" data-value="3">Okay</div>
-                  <div class="item" data-value="4">Good</div>
-                  <div class="item" data-value="5">Awesome!</div>
+                  <div class="item" data-value="1">1 - Awful</div>
+                  <div class="item" data-value="2">2 - Not Great</div>
+                  <div class="item" data-value="3">3 - Okay</div>
+                  <div class="item" data-value="4">4 - Good</div>
+                  <div class="item" data-value="5">5 - Awesome!</div>
                 </div>
               </div>
-              <div class="ui selection dropdown">
+              <div class="ui selection dropdown z-left">
                 <input type="hidden" name="outlook">
                 <i class="dropdown icon"></i>
                 <div class="default text">Outlook</div>
                 <div class="menu">
-                  <div class="item" data-value="1">Stuck</div>
-                  <div class="item" data-value="2">Uncertain</div>
-                  <div class="item" data-value="3">Meh</div>
-                  <div class="item" data-value="4">Hopeful</div>
-                  <div class="item" data-value="5">Excited</div>
+                  <div class="item" data-value="1">1 - Stuck</div>
+                  <div class="item" data-value="2">2 - Uncertain</div>
+                  <div class="item" data-value="3">3 - Meh</div>
+                  <div class="item" data-value="4">4 - Hopeful</div>
+                  <div class="item" data-value="5">5 - Excited</div>
                 </div>
               </div>
             </div>
-
             <p>
               <div class="ui input">
                 <!-- <label for="frequentEmotion">Frequent Emotion</label> -->

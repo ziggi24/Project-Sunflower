@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+  <script src="/semantic/dist/semantic.min.js"></script>
+  <!-- <script src='/scripts/app.js' defer></script> -->
+  <link rel="stylesheet" href="/styles/main.css">
+  <title>Document</title>
+</head>
+<body>
+  <%- include('../templates/header') %>
+  <main>
+
+  
+  <div class='ui middle aligned center aligned grid'>
+    <div class="column">
+      <h1 class='ui header'>Update</h1>
+      <form class='form' action="/profile/<%=user.username%>/update?_method=PUT" method='POST'>
+        <div class='ui segment'>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class='user icon'></i>
+              <input type="text" name='username' value='<%=user.username%>'>
+            </div>
+          </div>
+          <br>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class='id card outline icon'></i>
+              <input type="text" name='first' value='<%=user.first%>'>
+            </div>
+          </div>
+          <br>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class='id card outline icon'></i>
+              <input type="text" name='last' value='<%=user.last%>'>
+            </div>
+          </div>
+          <br>
+          <div class="field">
+            <div class="ui selection dropdown">
+              <input type="hidden" name="flower" value='<%=user.flower%>'>
+              <i class="dropdown icon"></i>
+              <div class="default text"><%=user.flower%></div>
+              <div class="menu">
+                <div class="item" data-value="Sunflower">Sunflower</div>
+                <div class="item" data-value="Lotus">Lotus</div>
+                <div class="item" data-value="Cornflower">Cornflower</div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class='at icon'></i>
+              <input type="text" name='email' value='<%=user.email%>'>
+            </div>
+          </div>
+          <br>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class='lock icon'></i>
+              <input type="password" name='password' placeholder="Password">
+            </div>
+          </div>
+          
+        </div>
+        <input class='ui fluid select olive button' type="submit" value="Update">
+      </form>
+    </div>
+    
+  </div>
+</main>
+<script>
+  $('.dropdown')
+  .dropdown({
+    // you can use any ui transition
+    transition: 'slide down'
+  });
+</script>
+</body>
+</html>

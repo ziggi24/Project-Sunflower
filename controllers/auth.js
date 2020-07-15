@@ -185,7 +185,32 @@ router.get('/profile/:username', require('connect-ensure-login').ensureLoggedIn(
     });
   }
 });
-
+router.get('/profile/:username/update', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
+  try {
+    const user = await db.User.findById({ _id: req.session.passport.user });
+    res.render('auth/update', {user: user});
+  } catch (err) {
+    console.log(err)
+  }
+});
+router.post('/profile/:username/update', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(req.body.password, salt);
+    req.body.password = hash;
+    const user = await db.User.findByIdAndUpdate(req.session.passport.user, {
+      username: req.body.username,
+      first: req.body.first,
+      last: req.body.last,
+      flower: req.body.flower,
+      email: req.body.email,
+      password: req.body.password,
+    });
+    res.redirect(`/profile/${user.username}`)
+  } catch (err) {
+    console.log(err);
+  }
+});
 // mood post route
 router.post('/profile/:username', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {
@@ -254,20 +279,31 @@ router.get('/profile/:username/mood/:moodId', require('connect-ensure-login').en
     console.log(err);
   }
 });
-
-// Mood post route for updates
-router.post('/profile/:username/mood/:moodId', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
+// mood update show page
+router.get('/profile/:username/mood/:moodId/update', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {
     const user = await db.User.findById({ _id: req.session.passport.user })
     const foundMood = await db.Mood.findById({ _id: req.params.moodId });
-    console.log(foundMood);
-    foundMood = {
+    const context = {
+      user: user, 
+      mood: foundMood,
+    }
+    res.render('mood/update', context);
+  } catch (err) {
+    console.log(err)
+  }
+
+})
+// Mood update route
+router.post('/profile/:username/mood/:moodId', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
+  try {
+    const user = await db.User.findById({ _id: req.session.passport.user })
+    let foundMood = await db.Mood.findByIdAndUpdate(req.params.moodId, {
       mood: req.body.mood,
       outlook: req.body.outlook,
       frequentEmotion: req.body.frequentEmotion,
       notes: req.body.notes,
-    }
-    await foundMood.save()
+    }, {new: true} );
     const context = { 
       user: user,
       mood: foundMood 
@@ -277,6 +313,18 @@ router.post('/profile/:username/mood/:moodId', require('connect-ensure-login').e
     console.log(err);
   }
 });
+// mood delete route 
+router.post('/profile/:username/mood/:moodId/delete', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
+  try{
+    const user = await db.User.findById({ _id: req.session.passport.user });
+    const mood = await db.Mood.findByIdAndDelete({_id: req.params.moodId});
+    await user.log.remove(mood);
+    await user.save();
+    res.redirect(`/profile/${user.username}/mood`)
+  } catch (err) {
+    console.log(err)
+  }
+})
 // Mood index route
 router.get('/profile/:username/mood', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {

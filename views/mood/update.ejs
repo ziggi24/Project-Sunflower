@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
+    rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+  <script src="/semantic/dist/semantic.min.js"></script>
+  <script src='/scripts/app.js' defer></script>
+  <link rel="stylesheet" href="/styles/profile.css">
+  <title>Sunflower</title>
+</head>
+
+<body>
+  <%- include('../templates/header') %>
+  
+  <div class="ui one column stackable center aligned page grid">
+    <div class="column twelve wide">
+      <div class="form-container">
+        <h3 class="ui center aligned header"><%=mood.dateAdded.toDateString()%></h3>
+        <hr>
+        <form class='ui form' action='/profile/<%=user.username%>/mood/<%=mood._id%>?_method=PUT' method='POST'>
+          <div class='ui two column'>
+            <div class="ui selection dropdown">
+              <input type="hidden" name="mood" value='<%=mood.mood%>'>
+              <i class="dropdown icon"></i>
+              <div class="default text"><%=mood.mood%></div>
+              <div class="menu">
+                <div class="item" data-value="1">1 - Awful</div>
+                <div class="item" data-value="2">2 - Not Great</div>
+                <div class="item" data-value="3">3 - Okay</div>
+                <div class="item" data-value="4">4 - Good</div>
+                <div class="item" data-value="5">5 - Awesome!</div>
+              </div>
+            </div>
+            <div class="ui selection dropdown z-left">
+              <input type="hidden" name="outlook" value='<%=mood.outlook%>'>
+              <i class="dropdown icon"></i>
+              <div class="default text"><%=mood.outlook%></div>
+              <div class="menu">
+                <div class="item" data-value="1">1 - Stuck</div>
+                <div class="item" data-value="2">2 - Uncertain</div>
+                <div class="item" data-value="3">3 - Meh</div>
+                <div class="item" data-value="4">4 - Hopeful</div>
+                <div class="item" data-value="5">5 - Excited</div>
+              </div>
+            </div>
+          </div>
+          <p>
+            <div class="ui input">
+              <!-- <label for="frequentEmotion">Frequent Emotion</label> -->
+              <input type="text" name="frequentEmotion" value="<%=mood.frequentEmotion%>">
+            </div>
+          </p>
+          <p>
+            <div class="ui input">
+              <!-- <label for="notes">Notes</label> -->
+              <textarea rows="3" type="text" name="notes"><%=mood.notes%></textarea>
+            </div>
+          </p>
+          <input class='ui secondary fluid olive button' type="submit" value="Update Mood">
+        </form>
+      </div>
+    </div>
+    </div>
+ </div>
+
+    
+
+  
+  <%- include('../templates/footer') %>
+</body>
+
+</html>
