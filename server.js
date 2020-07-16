@@ -29,7 +29,7 @@ app.use(session({
 app.use(helmet()); // security middleware which adds HTTP headers
 app.use(morgan('tiny')); // logger
 app.use(express.json());
-app.use(express.static('./public'));
+app.use(express.static(__dirname + '/public'));
 app.use(express.static('./semantic'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
