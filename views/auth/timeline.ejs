@@ -45,9 +45,9 @@
         <% for( let index = 0; index < log.length; index++ ) { %>
           <% if (index % 2 === 0) { %>
             
-              <div class="stem" id="z<%=log[index]._id%>">
-                <a href="/profile/<%=user.username%>/mood/<%=log[index]._id%>">
-                  <img src="/svg/vine3.svg" width='50px' height="100px" alt="">
+              <div class="stem centered" id="z<%=log[index]._id%>">
+                <a class='centered' href="/profile/<%=user.username%>/mood/<%=log[index]._id%>">
+                  <img src="/svg/vine4.svg" width='130px' height="100px" alt="">
                 </a>
               </div>
               <script>
@@ -61,9 +61,9 @@
               </script>
           <% } else {%>
             
-              <div class="stem" id="z<%=log[index]._id%>">
+              <div class="stem centered" id="z<%=log[index]._id%>">
                 <a href="/profile/<%=user.username%>/mood/<%=log[index]._id%>">
-                  <img src="/svg/vine3.svg" style="transform: scalex(-1);" width="50px" height="100px" alt="">
+                  <img src="/svg/vine4.svg" width="130px" height="100px" alt="">
                 </a>
               </div>
               <script>
