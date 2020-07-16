@@ -7,7 +7,6 @@
     "dev": "nodemon server.js",
     "start": "node server.js",
     "lint": "eslint --ext '.js' --fix .",
-    "heroku-postbuild": "gulp build ./public/semantic"
   },
   "repository": {
     "type": "git",
