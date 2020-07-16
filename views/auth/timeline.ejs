@@ -13,26 +13,41 @@
   <script src="https://unpkg.com/@popperjs/core@2" ></script>
   <script src="https://unpkg.com/tippy.js@6" ></script>
   <script src='/scripts/app.js' defer></script>
-  <link rel="stylesheet" href="/styles/profile.css">
+  <link rel="stylesheet" href="/styles/timeline.css">
   <title>Sunflower</title>
 </head>
 
 <body>
   <%- include('../templates/header') %>
   
-  <div class="ui one column stackable center aligned page grid">
-    <div class="column twelve wide">
-      <div class="flower-container">
+  <div class="ui one column stackable center aligned page grid timeline">
+    <div class="column twelve wide flower-container">
+      <div class="flower-container" >
         <h1>Your Flower</h1>
-        <div class="flower center aligned"
-          style='background-color: rgb(<%=user.petals.red%>, <%=user.petals.green%>, <%=user.petals.blue%>);'>
-          <%=user.flower%></div>
+        
+          <% if (user.flower === 'Sunflower') { %>
+            <div class="flower" style='background-color: rgb(<%=user.petals.red%>, <%=user.petals.green%>, <%=user.petals.blue%>);'>
+              <img class='flower-image' src="/svg/sunflower.svg" width='200px' height="175px" alt="Flower Image" style='fill: rgb(<%=user.petals.red%>, <%=user.petals.green%>, <%=user.petals.blue%>);'>
+            </div>
+          <% } else if (user.flower === 'Lotus'){ %>
+            <div class="flower" style='background-color: rgb(<%=user.petals.red%>, <%=user.petals.green%>, <%=user.petals.blue%>);'>
+              <img class='flower-image' src="/svg/lotus.svg" width='200px' height="130px" alt="Flower Image" style='fill: rgb(<%=user.petals.red%>, <%=user.petals.green%>, <%=user.petals.blue%>);'>
+            </div>
+          <%} else if (user.flower === 'Cornflower') {%>
+            <div class="flower" style='background-color: rgb(<%=user.petals.red%>, <%=user.petals.green%>, <%=user.petals.blue%>);'>
+              <img class='flower-image' src="/svg/cornflower.svg" width='200px' height="150px" alt="Flower Image" style='fill: rgb(<%=user.petals.red%>, <%=user.petals.green%>, <%=user.petals.blue%>);'>
+          </div>
+          <%}%>
+        </div>
+        <div class="stem-container">
+
+        
         <% for( let index = 0; index < log.length; index++ ) { %>
           <% if (index % 2 === 0) { %>
             
               <div class="stem" id="z<%=log[index]._id%>">
                 <a href="/profile/<%=user.username%>/mood/<%=log[index]._id%>">
-                  <img src="/svg/vine1.svg" width='50px' height="100px" alt="">
+                  <img src="/svg/vine3.svg" width='50px' height="100px" alt="">
                 </a>
               </div>
               <script>
@@ -48,7 +63,7 @@
             
               <div class="stem" id="z<%=log[index]._id%>">
                 <a href="/profile/<%=user.username%>/mood/<%=log[index]._id%>">
-                  <img src="/svg/vine1.svg" style="transform: rotate(180deg);" width="50px" height="100px" alt="">
+                  <img src="/svg/vine3.svg" style="transform: scalex(-1);" width="50px" height="100px" alt="">
                 </a>
               </div>
               <script>
@@ -62,6 +77,7 @@
             <%}%>
         
         <% } %>
+        </div>
       </div>
     </div>
  </div>
