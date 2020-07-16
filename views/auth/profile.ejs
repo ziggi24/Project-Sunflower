@@ -30,22 +30,40 @@
           <a class="item" data-tab="third">Frequent Emotions</a>
         </div>
         <div class="ui bottom attached tab segment active" data-tab="first">
-          <canvas id="moodChart" width="400" height="400"></canvas>
+          <% if (emotionsData.length) { %>
+            <canvas id="moodChart" width="400" height="400"></canvas>
+          <% } else { %>
+            <h3>Welcome to Sunflower</h3>
+            <p>
+              We're all about keeping track of our emotions. Each time you log what you're feeling
+              your flower grows taller, and also changes to reflect how you have been feeling. Keep
+              track of the color of the petals, they can be a visual indicator for how you've been feeling
+            </p>
+            <p>Log your first mood using the form on the right to get started</p>
+          <% }%>
         </div>
         <div class="ui bottom attached tab segment" data-tab="second">
-          <canvas id="outlookChart" width="400" height="400"></canvas>
+          <% if (emotionsData.length) { %>
+            <canvas id="outlookChart" width="400" height="400"></canvas>
+          <% } else { %>
+            <p>Log your first moood to see your data here!</p>
+          <% }%>
         </div>
         <div class="ui bottom attached tab segment" data-tab="third">
-          <canvas id="emotionsChart" width="400" height="400"></canvas>
+          <% if (emotionsData.length) { %>
+            <canvas id="emotionsChart" width="400" height="400"></canvas>
+          <% } else { %>
+            <p>Log your first moood to see your data here!</p>
+          <% }%>
         </div>
       </div>
       <div class="ui column right">
+        <div class="ui container right aligned">
+          <a href="/profile/<%=user.username%>/update">
+            <button class='ui button olive'><i class="edit outline icon"></i>Edit Profile</button>
+          </a>
+        </div>
         <br>
-        <div class="ui container olive">
-        <a href="/profile/<%=user.username%>/update">
-          <i class="edit outline icon"></i>
-        </a>
-      </div>
         <div class="form-container">
           <h3 class="ui center aligned header">How are you today?</h3>
           <hr>

@@ -24,8 +24,13 @@
   <main>
 
     <div class='ui middle aligned center aligned grid'>
-
-      <div class="column">
+      <div class="ui big image">
+        <img class='hero-image' src="/img/main-sunflower.png" alt="Main Page Sunflower Image">
+        <br>
+        <p class='tagline'>A quiet place to store your thoughts, and watch yourself grow</p>
+      </div>
+      
+      <div class="column" style='width: 300px;'>
         <h1 class='ui header'>Sign Up</h1>
         <form class='form' action="/signup" method='POST'>
           <div class='ui segment'>
@@ -85,7 +90,7 @@
     </div>
   </main>
 
-
+  <%- include('./templates/footer') %>
 </body>
 
 </html>
