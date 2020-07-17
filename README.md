@@ -22,6 +22,7 @@ This is a mood tracker app, with daily checkins and a profile page with more inf
 - Clone this repo
 - `npm i` 
 - `gulp build /public/semantic`
+- `touch .env` in root dir, add MONGODB_URI, PORT and SECRET values
 - `npm run dev`(use nodemon) or `npm start`
 
 
