@@ -195,18 +195,32 @@ router.get('/profile/:username/update', require('connect-ensure-login').ensureLo
 });
 router.post('/profile/:username/update', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(req.body.password, salt);
-    req.body.password = hash;
-    const user = await db.User.findByIdAndUpdate(req.session.passport.user, {
-      username: req.body.username,
-      first: req.body.first,
-      last: req.body.last,
-      flower: req.body.flower,
-      email: req.body.email,
-      password: req.body.password,
-    });
-    res.redirect(`/profile/${user.username}`)
+    if(req.body.password){
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(req.body.password, salt);
+      req.body.password = hash;
+      const user = await db.User.findByIdAndUpdate(req.session.passport.user, {
+        username: req.body.username,
+        first: req.body.first,
+        last: req.body.last,
+        flower: req.body.flower,
+        email: req.body.email,
+        password: req.body.password,
+      });
+      console.log(user)
+      res.redirect(`/profile/${user.username}`)
+    } else {
+      const user = await db.User.findByIdAndUpdate(req.session.passport.user, {
+        username: req.body.username,
+        first: req.body.first,
+        last: req.body.last,
+        flower: req.body.flower,
+        email: req.body.email,
+      });
+      console.log(user)
+      res.redirect(`/profile/${user.username}`)
+    }
+    // res.redirect(`/profile/${user.username}`)
   } catch (err) {
     console.log(err);
   }

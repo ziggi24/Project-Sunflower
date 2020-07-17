@@ -13,7 +13,7 @@
   <script src="/semantic/dist/semantic.min.js"></script>
   <script src='/scripts/app.js' defer></script>
   <link rel="stylesheet" href="/styles/profile.css">
-  <title>Document</title>
+  <title>Sunflower</title>
 </head>
 <body>
   <%- include('../templates/header') %>
@@ -70,7 +70,7 @@
           <form class='ui form' action='/profile/<%=user.username%>' method='POST'>
             <div class='ui two column'>
               <div class="ui selection dropdown">
-                <input type="hidden" name="mood">
+                <input required type="hidden" name="mood">
                 <i class="dropdown icon"></i>
                 <div class="default text">Mood</div>
                 <div class="menu">
@@ -82,7 +82,7 @@
                 </div>
               </div>
               <div class="ui selection dropdown z-left">
-                <input type="hidden" name="outlook">
+                <input required type="hidden" name="outlook">
                 <i class="dropdown icon"></i>
                 <div class="default text">Outlook</div>
                 <div class="menu">
@@ -97,7 +97,7 @@
             <p>
               <div class="ui input">
                 <!-- <label for="frequentEmotion">Frequent Emotion</label> -->
-                <input type="text" name="frequentEmotion" placeholder="Frequent Emotion">
+                <input required type="text" name="frequentEmotion" placeholder="Frequent Emotion">
               </div>
             </p>
             <p>
