@@ -2,6 +2,39 @@
 
 This is a mood tracker app, with daily checkins and a profile page with more info about your moods. On your profile page some of the information you add in each of your checkins get incorporated into your personal flower. If you have several days in a row where you are in a good, happy mood your flower might slowly change to a brighter yellow or pink color. If you're having a few rough days in a row then your flower could slowly change colors to darker blues and purples. Each entry you add will also add to the height of the flower, and each entry will show up as a leaf on the side of the flower, making almost a timeline. Each flower will have a hover state with some brief info about that mood entry, and if you click on it, it will take you to the full entry. 
 
+### Tech Stack
+
+- Node 
+- Express 
+- MongoDB
+
+### External Express Modules/Middleware
+
+- [helmet](https://github.com/helmetjs/helmet) - security middleware, adds HTTPS headers
+- [protect](https://github.com/RisingStack/protect) - protects agains SQL injection and XSS
+- [tippy](https://atomiks.github.io/tippyjs/) - Tool Tips!
+- [morgan](https://github.com/expressjs/morgan) - better request logger
+- [passport](http://www.passportjs.org/) - external auth (google, fb, etc)
+- [mongoose](https://www.npmjs.com/package/mongoose) - mongodb middleware
+- [Fomantic UI](https://fomantic-ui.com/) - community fork of Semantic UI
+
+### Install Instructions 
+
+- Clone this repo
+- `npm i` 
+- `gulp build /public/semantic`
+- `npm run dev`(use nodemon) or `npm start`
+
+
+### Unsolved Problems / Future Features 
+
+- data tabs on profile page sort by last week, last month, all time etc 
+- line graph to show average mood over time 
+- animated flower growing 
+- welcome / check in emails 
+- more robust mobile design 
+
+
 ### Wireframes
 
 ##### Home
@@ -71,24 +104,6 @@ I like the medium 500 or even the semi-bold 600 Playfair display font for my tit
 ![](./resources/font2.png)
 
 I'm thinking this is a good, softer, font for body text. 
-
-## Tech Stack
-
-- Node 
-
-- Express 
-
-- Postgresql 
-
-### External Express Modules/Middleware
-
-- [helmet](https://github.com/helmetjs/helmet) - security middleware, adds HTTPS headers
-- [protect](https://github.com/RisingStack/protect) - protects agains SQL injection and XSS
-- [tippy](https://atomiks.github.io/tippyjs/) - Tool Tips!
-- [morgan](https://github.com/expressjs/morgan) - better request logger
-- [passport](http://www.passportjs.org/) - external auth (google, fb, etc)
-- [mongoose](https://www.npmjs.com/package/mongoose) - mongodb middleware
-- [multer](https://www.npmjs.com/package/multer) - photo upload middleware
 
 
 
