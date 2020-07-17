@@ -12,6 +12,8 @@ const router = express.Router();
 
 const db = require('../models');
 
+
+// for photo uploads which I never got around to 
 const storage = multer.diskStorage({
   destination: './uploads/images',
   filename: function (req, file, cb) {
@@ -76,6 +78,7 @@ router.use(passport.session());
 const unique = (value, index, self) => {
   return self.indexOf(value) === index
 }
+// creates an array with a count of each occurance of each emotion
 const calcOccur = (arr, uniques) =>{
   let finalArr = new Array(uniques.length).fill(0);
   for(let i = 0; i < uniques.length; i++){
@@ -148,7 +151,7 @@ router.post('/signup', async (req, res, next) => {
   }
 });
 
-// TODO Add /profile redirect here
+// /profile redirect to proper route
 router.get('/profile',require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {
     const user = await db.User.findById({ _id: req.session.passport.user });
@@ -185,6 +188,7 @@ router.get('/profile/:username', require('connect-ensure-login').ensureLoggedIn(
     });
   }
 });
+// profile update route 
 router.get('/profile/:username/update', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {
     const user = await db.User.findById({ _id: req.session.passport.user });
@@ -193,6 +197,7 @@ router.get('/profile/:username/update', require('connect-ensure-login').ensureLo
     console.log(err)
   }
 });
+// profile update post route
 router.post('/profile/:username/update', require('connect-ensure-login').ensureLoggedIn(), async (req, res) => {
   try {
     if(req.body.password){
