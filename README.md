@@ -31,6 +31,7 @@ This is a mood tracker app, with daily checkins and a profile page with more inf
 - data tabs on profile page sort by last week, last month, all time etc 
 - line graph to show average mood over time 
 - upload profile pic
+- less derpy looking flowers
 - animated flower growing 
 - welcome / check in emails 
 - more robust mobile design 
