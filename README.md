@@ -11,7 +11,6 @@ This is a mood tracker app, with daily checkins and a profile page with more inf
 ### External Express Modules/Middleware
 
 - [helmet](https://github.com/helmetjs/helmet) - security middleware, adds HTTPS headers
-- [protect](https://github.com/RisingStack/protect) - protects agains SQL injection and XSS
 - [tippy](https://atomiks.github.io/tippyjs/) - Tool Tips!
 - [morgan](https://github.com/expressjs/morgan) - better request logger
 - [passport](http://www.passportjs.org/) - external auth (google, fb, etc)
@@ -33,6 +32,7 @@ This is a mood tracker app, with daily checkins and a profile page with more inf
 - animated flower growing 
 - welcome / check in emails 
 - more robust mobile design 
+- get external auth working with passport js
 
 
 ### Wireframes
